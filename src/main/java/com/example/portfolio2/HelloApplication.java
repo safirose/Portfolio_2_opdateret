@@ -15,20 +15,20 @@ public class HelloApplication extends Application {
     @Override
     public void start(Stage stage) {
 
-        // Opretter labels til vores GUI
+        // Opretter labels/Overskrifter til vores GUI
         Label label1 = new Label("Program");
         Label label2 = new Label("Subject 1");
         Label label3 = new Label("Subject 2");
         Label label4 = new Label("Electives");
 
-        // Opretter model-instans for at hente data
+        // Opretter model-instans for at hente data (fra model programmet?)
         Model model = new Model();
 
-        // **PROGRAM COMBOBOX**
+        // Combobox til vores bachelor program
         ComboBox<String> comboBoxProgram = new ComboBox<>();
         comboBoxProgram.getItems().addAll(model.baseProgram());
 
-        // **COURSES COMBOBOX** (Afhænger af program)
+        //Combobox til kurser
         ComboBox<String> comboBoxCourses = new ComboBox<>();
         TextArea textAreaCourses = new TextArea();
         textAreaCourses.setEditable(false);
@@ -53,13 +53,13 @@ public class HelloApplication extends Application {
             }
         });
 
-        // **SUBJECT MODULES**
+        // Combobox til fagmodul 1 & 2
         ComboBox<String> comboBoxSubject1 = new ComboBox<>();
         ComboBox<String> comboBoxSubject2 = new ComboBox<>();
         comboBoxSubject1.getItems().addAll(model.subjectModule());
         comboBoxSubject2.getItems().addAll(model.subjectModule());
 
-        // **SUBJECT COURSES** (Afhænger af valgt subject module)
+        // Kurser af fagmoduler (Afhænger af valgt subject module)
         ComboBox<String> comboBoxSubjectCourses1 = new ComboBox<>();
         ComboBox<String> comboBoxSubjectCourses2 = new ComboBox<>();
 
