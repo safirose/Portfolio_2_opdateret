@@ -55,7 +55,11 @@ public class HelloApplication extends Application {
 
         // Combobox til fagmodul 1 & 2
         ComboBox<String> comboBoxSubject1 = new ComboBox<>();
+        TextArea textAreaSubject1 = new TextArea();
+        textAreaSubject1.setEditable(false);
         ComboBox<String> comboBoxSubject2 = new ComboBox<>();
+        TextArea textAreaSubject2 = new TextArea();
+        textAreaSubject2.setEditable(false);
         comboBoxSubject1.getItems().addAll(model.subjectModule());
         comboBoxSubject2.getItems().addAll(model.subjectModule());
 
@@ -98,10 +102,12 @@ public class HelloApplication extends Application {
         root.add(label2, 1, 0);
         root.add(comboBoxSubject1, 1, 1);
         root.add(comboBoxSubjectCourses1, 1, 2);
+        root.add(textAreaSubject1, 1, 3);
 
         root.add(label3, 2, 0);
         root.add(comboBoxSubject2, 2, 1);
         root.add(comboBoxSubjectCourses2, 2, 2);
+        root.add(textAreaSubject2, 2, 3);
 
         root.add(label4, 3, 0);
         root.add(comboBoxElectives, 3, 1);
