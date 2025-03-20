@@ -57,6 +57,8 @@ public class HelloApplication extends Application {
         ComboBox<String> comboBoxSubject1 = new ComboBox<>();
         TextArea textAreaSubject1 = new TextArea();
         textAreaSubject1.setEditable(false);
+
+
         ComboBox<String> comboBoxSubject2 = new ComboBox<>();
         TextArea textAreaSubject2 = new TextArea();
         textAreaSubject2.setEditable(false);
@@ -70,9 +72,12 @@ public class HelloApplication extends Application {
         // Når Subject 1 vælges → Opdater kurser
         comboBoxSubject1.setOnAction(event -> {
             String selectedSubject = comboBoxSubject1.getValue();
-            comboBoxSubjectCourses1.getItems().clear();
+            comboBoxSubjectCourses1.getItems().clear(); // Ryd tidligere valg
+            textAreaSubject1.clear(); // Ryd tekstfeltet
+
+            List<String> subjectCourses = model.subjectCourse(selectedSubject);
             if (selectedSubject != null) {
-                comboBoxSubjectCourses1.getItems().addAll(model.subjectCourse(selectedSubject));
+                comboBoxSubjectCourses1.getItems().addAll(subjectCourses);
             }
         });
 
@@ -84,6 +89,8 @@ public class HelloApplication extends Application {
                 comboBoxSubjectCourses2.getItems().addAll(model.subjectCourse(selectedSubject));
             }
         });
+
+
 
         // **ELECTIVES**
         ComboBox<String> comboBoxElectives = new ComboBox<>();
@@ -122,4 +129,6 @@ public class HelloApplication extends Application {
     public static void main(String[] args) {
         launch();
     }
-}
+    }
+
+
