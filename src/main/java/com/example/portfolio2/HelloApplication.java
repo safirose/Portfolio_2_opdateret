@@ -62,6 +62,7 @@ public class HelloApplication extends Application {
         ComboBox<String> comboBoxSubject2 = new ComboBox<>();
         TextArea textAreaSubject2 = new TextArea();
         textAreaSubject2.setEditable(false);
+
         comboBoxSubject1.getItems().addAll(model.subjectModule());
         comboBoxSubject2.getItems().addAll(model.subjectModule());
 
@@ -69,34 +70,52 @@ public class HelloApplication extends Application {
         ComboBox<String> comboBoxSubjectCourses1 = new ComboBox<>();
         ComboBox<String> comboBoxSubjectCourses2 = new ComboBox<>();
 
-        // Når Subject 1 vælges → Opdater kurser
         comboBoxSubject1.setOnAction(event -> {
             String selectedSubject = comboBoxSubject1.getValue();
-            comboBoxSubjectCourses1.getItems().clear(); // Ryd tidligere valg
-            textAreaSubject1.clear(); // Ryd tekstfeltet
+            comboBoxSubjectCourses1.getItems().clear();
+            textAreaSubject1.clear();
 
-            List<String> subjectCourses = model.subjectCourse(selectedSubject);
             if (selectedSubject != null) {
+                List<String> subjectCourses = model.subjectCourse(selectedSubject);
                 comboBoxSubjectCourses1.getItems().addAll(subjectCourses);
             }
         });
 
-        // Når Subject 2 vælges → Opdater kurser
+
+        // **Når Subject 2 vælges → Opdater kurser, men ikke textArea endnu**
         comboBoxSubject2.setOnAction(event -> {
             String selectedSubject = comboBoxSubject2.getValue();
             comboBoxSubjectCourses2.getItems().clear();
+            textAreaSubject2.clear();
+
             if (selectedSubject != null) {
-                comboBoxSubjectCourses2.getItems().addAll(model.subjectCourse(selectedSubject));
+                List<String> subjectCourses = model.subjectCourse(selectedSubject);
+                comboBoxSubjectCourses2.getItems().addAll(subjectCourses);
             }
         });
+        // **Når et kursus vælges i Subject 1 → Tilføj til textAreaSubject1**
+        comboBoxSubjectCourses1.setOnAction(event -> {
+            String selectedCourse = comboBoxSubjectCourses1.getValue();
+            if (selectedCourse != null && !textAreaSubject1.getText().contains(selectedCourse)) {
+                textAreaSubject1.appendText(selectedCourse + "\n");
+            }
+        });
+        // **Når et kursus vælges i Subject 2 → Tilføj til textAreaSubject2**
+        comboBoxSubjectCourses2.setOnAction(event -> {
+            String selectedCourse = comboBoxSubjectCourses2.getValue();
+            if (selectedCourse != null && !textAreaSubject2.getText().contains(selectedCourse)) {
+                textAreaSubject2.appendText(selectedCourse + "\n");
+            }
+        });
+        //Combobox til layout, så det ser lidt pænere ud
+        ComboBox comboboxLayout = new ComboBox();
 
 
-
-        // **ELECTIVES**
+        // Combobox til valgfag
         ComboBox<String> comboBoxElectives = new ComboBox<>();
         comboBoxElectives.getItems().addAll("Functional Programming", "Scientific Computing");
 
-        // **GRIDPANE LAYOUT**
+        // Vores gridpane layout, så vi kan styre placering af vores elementer
         GridPane root = new GridPane();
         root.setHgap(10);
         root.setVgap(10);
@@ -117,9 +136,11 @@ public class HelloApplication extends Application {
         root.add(textAreaSubject2, 2, 3);
 
         root.add(label4, 3, 0);
-        root.add(comboBoxElectives, 3, 1);
+        root.add(comboboxLayout,3,1);
+        root.add(comboBoxElectives, 3, 2);
+        root.add(textAreaElective, 3, 3);
 
-        // **SCENE SETUP**
+        // Vores "scene"
         Scene scene = new Scene(root, 800, 400);
         stage.setTitle("Bachelor Program Selector");
         stage.setScene(scene);
