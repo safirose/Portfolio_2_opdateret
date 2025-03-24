@@ -1,5 +1,5 @@
 package com.example.portfolio2;
-
+//Importerer følgende javafx klasser
 import javafx.application.Application;
 import javafx.scene.Scene;
 import javafx.scene.control.ComboBox;
@@ -7,8 +7,8 @@ import javafx.scene.control.Label;
 import javafx.scene.control.TextArea;
 import javafx.scene.layout.GridPane;
 import javafx.stage.Stage;
-
-import java.util.List;
+//Importerer Java klasser * = Mange
+import java.util.*;
 
 public class HelloApplication extends Application {
 
@@ -24,28 +24,33 @@ public class HelloApplication extends Application {
         // Opretter model-instans for at hente data (fra model programmet?)
         Model model = new Model();
 
-        // Combobox til vores bachelor program
+        // Combobox til valg af bachelorprogram
         ComboBox<String> comboBoxProgram = new ComboBox<>();
         comboBoxProgram.getItems().addAll(model.baseProgram());
 
         //Combobox til kurser
         ComboBox<String> comboBoxCourses = new ComboBox<>();
+        //Opretter et textarea
         TextArea textAreaCourses = new TextArea();
+        //Bruger skal ikke kunne ændre i vores textarea
         textAreaCourses.setEditable(false);
 
         // Håndtering af programvalg
         comboBoxProgram.setOnAction(event -> {
+        //Henter det valgte program
             String selectedProgram = comboBoxProgram.getValue();
-            comboBoxCourses.getItems().clear();  // Ryd tidligere valg
+        //Rydder "fravalgte" kurser fra combobox
+            comboBoxCourses.getItems().clear();
+        //Rydder "fravalgte" kurser fra textarea
             textAreaCourses.clear();
-
+        //Henter listen af kurser, der hører til det valgte program - fra model-klassen
             List<String> courses = model.baseCourse(selectedProgram);
             if (courses != null) {
                 comboBoxCourses.getItems().addAll(courses);
             }
         });
 
-        // Når kursus vælges, tilføj det til tekstområdet
+        // Når kursus vælges, tilføj til textarea
         comboBoxCourses.setOnAction(event -> {
             String selectedCourse = comboBoxCourses.getValue();
             if (selectedCourse != null && !textAreaCourses.getText().contains(selectedCourse)) {
@@ -117,8 +122,9 @@ public class HelloApplication extends Application {
 
         // Vores gridpane layout, så vi kan styre placering af vores elementer
         GridPane root = new GridPane();
-        root.setHgap(10);
-        root.setVgap(10);
+        //Hvad gør disse to?
+        //root.setHgap(10);
+        //root.setVgap(10);
 
         root.add(label1, 0, 0);
         root.add(comboBoxProgram, 0, 1);
@@ -142,7 +148,7 @@ public class HelloApplication extends Application {
 
         // Vores "scene"
         Scene scene = new Scene(root, 800, 400);
-        stage.setTitle("Bachelor Program Selector");
+        stage.setTitle("Bachelor Program");
         stage.setScene(scene);
         stage.show();
     }
@@ -151,5 +157,9 @@ public class HelloApplication extends Application {
         launch();
     }
     }
+
+    //NOTE:Hvis tid, lav programmet metode orienteret.
+    //NOTE: Hvis tid, lav layout pænere ved at ændre størrelsen på combobox, textarea, labels osv.
+
 
 
