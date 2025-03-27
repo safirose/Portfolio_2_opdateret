@@ -35,6 +35,7 @@ public class HelloApplication extends Application {
         TextArea textAreaElectives = new TextArea();
         //Bruger skal ikke kunne ændre i vores textarea
         textAreaCourses.setEditable(false);
+        textAreaElectives.setEditable(false);
 
         // Håndtering af programvalg
         comboBoxProgram.setOnAction(event -> {
