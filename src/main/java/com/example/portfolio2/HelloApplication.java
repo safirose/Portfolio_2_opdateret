@@ -32,6 +32,7 @@ public class HelloApplication extends Application {
         ComboBox<String> comboBoxCourses = new ComboBox<>();
         //Opretter et textarea
         TextArea textAreaCourses = new TextArea();
+        TextArea textAreaElectives = new TextArea();
         //Bruger skal ikke kunne ændre i vores textarea
         textAreaCourses.setEditable(false);
 
