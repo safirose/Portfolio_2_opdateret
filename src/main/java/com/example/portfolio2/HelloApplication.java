@@ -30,7 +30,7 @@ public class HelloApplication extends Application {
 
         //Combobox til kurser
         ComboBox<String> comboBoxCourses = new ComboBox<>();
-        //Opretter et textarea
+        //Opretter et textarea :)
         TextArea textAreaCourses = new TextArea();
         TextArea textAreaElectives = new TextArea();
         //Bruger skal ikke kunne ændre i vores textarea
