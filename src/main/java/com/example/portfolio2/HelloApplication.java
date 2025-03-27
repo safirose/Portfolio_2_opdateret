@@ -144,7 +144,7 @@ public class HelloApplication extends Application {
         root.add(label4, 3, 0);
         root.add(comboboxLayout,3,1);
         root.add(comboBoxElectives, 3, 2);
-        root.add(textAreaElective, 3, 3);
+        root.add(textAreaElectives, 3, 3);
 
         // Vores "scene"
         Scene scene = new Scene(root, 800, 400);
